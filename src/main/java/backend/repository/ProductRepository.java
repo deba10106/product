@@ -1,11 +1,13 @@
 package backend.repository;
 
-import backend.model.Product;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.stereotype.Repository;
 
+import backend.model.Product;
+
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends CrudRepository<Product, Long>, QueryByExampleExecutor<Product> {
 	
 
 }
