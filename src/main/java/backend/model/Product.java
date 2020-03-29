@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -42,5 +44,22 @@ public class Product {
     
     @Column(name="last_updated_dt")
     private ZonedDateTime lastUpdatedDate;
+    
+    @PrePersist
+    private void prePersist() {
+        if (createdDate == null) {
+        	createdDate = ZonedDateTime.now();
+        }
+        if (lastUpdatedDate == null) {
+        	lastUpdatedDate = ZonedDateTime.now();
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        if (lastUpdatedDate == null) {
+        	lastUpdatedDate = ZonedDateTime.now();
+        }
+    }
 	
 }
