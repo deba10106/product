@@ -22,31 +22,31 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping
+	@GetMapping("products")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ProductDTO> findAll() {
 		return productService.findAll();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("products/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ProductDTO getById(@PathVariable Long id) {
 		return productService.getById(id);
 	}
 
-	@PostMapping
+	@PostMapping("products")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Long create(@RequestBody ProductDTO productDTO) {
 		return productService.create(productDTO);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("products/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody ProductDTO productDTO) {
 		productService.update(productDTO);
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "products/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable("id") Long id) {
 		productService.deleteById(id);
