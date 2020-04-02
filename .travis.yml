@@ -1,0 +1,23 @@
+sudo: required
+language: java
+jdk:
+  - oraclejdk11
+services:
+  - docker
+script:
+  - bash build.sh
+after_success:
+  - git add -f build/libs/application.jar  
+deploy:
+  skip_cleanup: true
+  provider: elasticbeanstalk
+  region: "ap-southeast-1"
+  app: "product"
+  env: "product-stag"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-413765782488"
+  bucket_path: "product-stag"
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^release\/.*$	  
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"

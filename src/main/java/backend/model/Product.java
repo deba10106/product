@@ -1,14 +1,14 @@
 package backend.model;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,7 +20,12 @@ import lombok.Setter;
 @Setter
 @Table(name = "products")
 @NoArgsConstructor
-public class Product {
+public class Product extends BaseModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,38 +33,9 @@ public class Product {
 
 	private String name;
 	private String description;
-    private String category;
-    private Integer price;
-    private String status;
-    private ZonedDateTime expiryDateTime;
+    private BigDecimal price;
+    private ZonedDateTime expiryAt;
     
-    @Column(name="created_by")
-    private String createdBy;
-    
-    @Column(name="created_dt")
-    private ZonedDateTime createdDate;
-    
-    @Column(name="last_updated_by")
-    private String lastUpdatedBy;
-    
-    @Column(name="last_updated_dt")
-    private ZonedDateTime lastUpdatedDate;
-    
-    @PrePersist
-    private void prePersist() {
-        if (createdDate == null) {
-        	createdDate = ZonedDateTime.now();
-        }
-        if (lastUpdatedDate == null) {
-        	lastUpdatedDate = ZonedDateTime.now();
-        }
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        if (lastUpdatedDate == null) {
-        	lastUpdatedDate = ZonedDateTime.now();
-        }
-    }
-	
+    @ManyToMany
+    private Set<Cart> carts;
 }
