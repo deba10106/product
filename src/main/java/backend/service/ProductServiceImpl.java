@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService{
 	public Long create(ProductDTO productDTO) {
 		Product product = new Product();
 		BeanUtils.copyProperties(productDTO, product);
-		productRepository.save(product);
+		product = productRepository.save(product);
 		
 		return product.getId();
 	}
@@ -70,9 +70,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		productRepository.deleteById(id);
-	}
-	
-	
+	public void deleteByUserIdAndId(Long userId, Long id) {
+		Optional<Product> productOpt = productRepository.findById(id);
+		if(productOpt.isPresent()) {
+			Product product = productOpt.get();
+			if(product.getUserId() == userId) {
+				productRepository.deleteById(id);
+			}
+		}		
+	}	
 }

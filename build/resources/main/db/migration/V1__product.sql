@@ -2,6 +2,7 @@ CREATE TABLE products
    (
       id          	BIGSERIAL    	NOT NULL PRIMARY KEY,
       name       	VARCHAR(255)	NOT NULL,
+      user_id	    bigint			NOT NULL,
       description	VARCHAR(255),
       price			money,
       expiry_at		DATE,

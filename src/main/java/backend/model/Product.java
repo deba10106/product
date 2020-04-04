@@ -32,6 +32,7 @@ public class Product extends BaseModel {
 	private Long id;
 
 	private String name;
+	private Long userId;
 	private String description;
     private BigDecimal price;
     private ZonedDateTime expiryAt;
