@@ -22,34 +22,36 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping("products")
+	@GetMapping("/products")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ProductDTO> findAll() {
 		return productService.findAll();
 	}
 
-	@GetMapping("products/{id}")
+	@GetMapping("/products/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ProductDTO getById(@PathVariable Long id) {
 		return productService.getById(id);
 	}
 
-	@PostMapping("products")
+	@PostMapping("/users/{userId}/products")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Long create(@RequestBody ProductDTO productDTO) {
+	public Long create(@PathVariable Long userId, @RequestBody ProductDTO productDTO) {
+		productDTO.setUserId(userId);
 		return productService.create(productDTO);
 	}
 
-	@PutMapping("products/{id}")
+	@PutMapping("/users/{userId}/products/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@RequestBody ProductDTO productDTO) {
+	public void update(@PathVariable Long userId, @RequestBody ProductDTO productDTO) {
+		productDTO.setUserId(userId);
 		productService.update(productDTO);
 	}
 
-	@DeleteMapping(value = "products/{id}")
+	@DeleteMapping(value = "/users/{userId}/products/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable("id") Long id) {
-		productService.deleteById(id);
+	public void delete(@PathVariable Long userId, @PathVariable("id") Long id) {
+		productService.deleteByUserIdAndId(userId, id);
 	}
 	
 
