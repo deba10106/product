@@ -16,4 +16,6 @@ public interface ProductService {
 	public List<ProductDTO> findAll();
 
 	public void deleteByUserIdAndId(Long userId, Long id);
+	
+	public List<ProductDTO> getProductByUserID(Long userId);
 }
