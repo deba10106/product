@@ -25,25 +25,35 @@ public class ProductController {
 	private Object YearMonth;
 
 	@GetMapping("/products")
-	List<ProductDTO> all() {
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setName("Mala HotPot");
-		productDTO.setDescription("best product in the world");
-		productDTO.setCategory("good");
-		
-        productDTO.setPrice(102);	
-        productDTO.setStatus("Available");
-		productDTO.setExpiryDate(Today);
-		productDTO.setCreatedDate(Today);
-		productDTO.setCreatedBy("Suravi");
-		productDTO.setLastUpdateBy("Suravi");
-		productDTO.setLastUpdateDate(Today);
+	@ResponseStatus(HttpStatus.OK)
+	public List<ProductDTO> findAll() {
+		return productService.findAll();
+	}
 
-		//userService.create(userDTO);
-		//System.out.print("erwin");
-		List<ProductDTO> list = new ArrayList<ProductDTO>();
-		list.add(productDTO);
-		return list;
+	@GetMapping("/products/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ProductDTO getById(@PathVariable Long id) {
+		return productService.getById(id);
+	}
+
+	@PostMapping("/users/{userId}/products")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Long create(@PathVariable Long userId, @RequestBody ProductDTO productDTO) {
+		productDTO.setUserId(userId);
+		return productService.create(productDTO);
+	}
+
+	@PutMapping("/users/{userId}/products/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void update(@PathVariable Long userId, @RequestBody ProductDTO productDTO) {
+		productDTO.setUserId(userId);
+		productService.update(productDTO);
+	}
+
+	@DeleteMapping(value = "/users/{userId}/products/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable Long userId, @PathVariable("id") Long id) {
+		productService.deleteByUserIdAndId(userId, id);
 	}
 	
 
