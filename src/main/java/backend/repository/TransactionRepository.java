@@ -1,11 +1,11 @@
 package backend.repository;
 
-import backend.model.Product;
+import backend.model.Transaction;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 	
 
 }

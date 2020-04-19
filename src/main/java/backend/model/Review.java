@@ -15,66 +15,50 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "products")
+@Table(name = "reviews")
 @NoArgsConstructor
-public class Product {
+public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private String name;
-	private String description;
-    private String category;
-    private Integer price;
-    private String status;
-    private Date expiry_dt;
-    private  String created_by;
+	private Long user_id;
+	private Integer star_rating;
+    private String remarks;
+    private String created_by;
     private Date created_dt;
     private String last_updated_by;
     private Date last_updated_dt;
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public Long getUser_id() {
+		return user_id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
+
+	public Integer getStar_rating() {
+		return star_rating;
+	}
+	public void setStar_rating(Integer star_rating) {
+		this.star_rating = star_rating;
     }
-    public String getDescription() {
-		return description;
+
+    public String getRemarks() {
+		return remarks;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
     }
-    public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-    }
-    public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-    }
-    public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-    }
-	public Date getExpiryDate() {
-		return expiry_dt;
-	}
-	public void setExpiryDate(Date expiry_dt) {
-		this.expiry_dt = expiry_dt;
-	}
+
+
 	public String getCreatedBy() {
 		return created_by;
 	}
