@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import backend.dto.ProductDTO;
@@ -78,5 +79,28 @@ public class ProductServiceImpl implements ProductService{
 				productRepository.deleteById(id);
 			}
 		}		
-	}	
+	}
+
+	@Override
+	public List<ProductDTO> getProductByUserID(Long userId) {
+		Product product = new Product();
+		product.setUserId(userId);
+		
+		Example<Product> example = Example.of(product);
+		Iterable<Product> iterable = productRepository.findAll(example);
+
+		List<ProductDTO> result = StreamSupport.stream(iterable.spliterator(), false).map(new Function<Product, ProductDTO>() {
+			@Override
+			public ProductDTO apply(Product product) {
+				ProductDTO productDTO = new ProductDTO();
+				BeanUtils.copyProperties(product, productDTO);
+				
+				return productDTO;
+			}
+		}).collect(Collectors.toList());
+
+		return result;
+	}
+	
+	
 }
