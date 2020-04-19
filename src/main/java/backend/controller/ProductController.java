@@ -33,6 +33,12 @@ public class ProductController {
 	public ProductDTO getById(@PathVariable Long id) {
 		return productService.getById(id);
 	}
+	
+	@GetMapping("/users/{userId}/products")
+	@ResponseStatus(HttpStatus.OK)
+	public List<ProductDTO> getProductByUserID(@PathVariable Long userId) {
+		return productService.getProductByUserID(userId);
+	}
 
 	@PostMapping("/users/{userId}/products")
 	@ResponseStatus(HttpStatus.CREATED)
