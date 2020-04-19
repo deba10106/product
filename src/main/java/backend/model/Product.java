@@ -1,104 +1,42 @@
 package backend.model;
 
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Setter
 @Table(name = "products")
 @NoArgsConstructor
-public class Product {
+public class Product extends BaseModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
+	private Long userId;
 	private String description;
-    private String category;
-    private Integer price;
-    private String status;
-    private Date expiry_dt;
-    private  String created_by;
-    private Date created_dt;
-    private String last_updated_by;
-    private Date last_updated_dt;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-    }
-    public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-    }
-    public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-    }
-    public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-    }
-    public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-    }
-	public Date getExpiryDate() {
-		return expiry_dt;
-	}
-	public void setExpiryDate(Date expiry_dt) {
-		this.expiry_dt = expiry_dt;
-	}
-	public String getCreatedBy() {
-		return created_by;
-	}
-	public void setCreatedBy(String created_by) {
-		this.created_by = created_by;
-	}
-	public Date getCreatedDate() {
-		return created_dt;
-	}
-	public void setCreatedDate(Date created_dt) {
-		this.created_dt = created_dt;
-	}
-	public String getLastUpdateBy() {
-		return last_updated_by;
-	}
-	public void setLastUpdateBy(String last_updated_by) {
-		this.last_updated_by = last_updated_by;
-	}
-	public Date getLastUpdateDate() {
-		return last_updated_dt;
-	}
-	public void setLastUpdateDate(Date last_updated_dt) {
-		this.last_updated_dt = last_updated_dt;
-	}
-	
-	
+    private BigDecimal price;
+    private ZonedDateTime expiryAt;
+    
+    @ManyToMany
+    private Set<Cart> carts;
 }
