@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,9 +35,14 @@ class ProductServiceTest {
 		productDTO.setName("some name");
 		productDTO.setPrice(new BigDecimal(10.0));
 		productDTO.setUserId(1l);
-
-		//productService.create(productDTO);
-		//verify(productRepository, times(1)).save(any(Product.class));
+		
+		Product product = new Product();
+		product.setId(1l);
+		
+		when(productRepository.save(any())).thenReturn(product);
+		
+		productService.create(productDTO);
+		verify(productRepository, times(1)).save(any(Product.class));
 	}
 	
 	@Test
