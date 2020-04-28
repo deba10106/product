@@ -1,6 +1,7 @@
 package backend.dto;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +15,5 @@ public class ProductDTO {
 	private Long userId;
 	private String description;
 	private BigDecimal price;
+	private ZonedDateTime expiryAt;
 }
