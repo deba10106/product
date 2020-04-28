@@ -55,7 +55,11 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductDTO> findAll() {
-		Iterable<Product> iterable = productRepository.findAll();
+		Product product = new Product();
+		product.setIsDeleted(false);
+		
+		Example<Product> example = Example.of(product);
+		Iterable<Product> iterable = productRepository.findAll(example);
 
 		List<ProductDTO> result = StreamSupport.stream(iterable.spliterator(), false).map(new Function<Product, ProductDTO>() {
 			@Override
