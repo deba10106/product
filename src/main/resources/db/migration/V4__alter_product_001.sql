@@ -1,2 +1,2 @@
-ALTER TABLE table_name
+ALTER TABLE products
 ADD COLUMN s3ImagePath VARCHAR(255);

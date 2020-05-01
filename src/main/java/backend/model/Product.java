@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,6 +37,8 @@ public class Product extends BaseModel {
 	private String description;
     private BigDecimal price;
     private ZonedDateTime expiryAt;
+    
+    @Column(name="s3image_path")
     private String s3ImagePath;
     
     @ManyToMany
