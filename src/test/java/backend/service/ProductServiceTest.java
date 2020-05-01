@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +17,7 @@ import backend.dto.ProductDTO;
 import backend.model.Product;
 import backend.repository.ProductRepository;
 
-@SpringBootTest(classes = ProductServiceImpl.class)
+@SpringBootTest(classes = {ProductServiceImpl.class, UploadServiceImpl.class})
 class ProductServiceTest {
 	
 	@Autowired
@@ -70,7 +69,7 @@ class ProductServiceTest {
 	@Test
 	void getAllProductTest() {
 		productService.findAll();
-		verify(productRepository, times(1)).findAll();
+		verify(productRepository, times(1)).findAll(any());
 	}
 	
 	@Test
@@ -83,6 +82,5 @@ class ProductServiceTest {
 		
 		verify(productRepository, times(1)).findAll(any());
 	}
-	
 
 }

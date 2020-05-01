@@ -8,6 +8,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import backend.exception.ProductNotFoundException;
+import backend.exception.UploadException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -20,6 +21,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	@ExceptionHandler(ProductNotFoundException.class)
     public final ResponseEntity<?> handleInvalidUsernameOrPasswordException(Exception ex, WebRequest request) {
         return new ResponseEntity<String>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+	
+	@ExceptionHandler(UploadException.class)
+    public final ResponseEntity<?> handleUploadFailure(Exception ex, WebRequest request) {
+        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 	
 }

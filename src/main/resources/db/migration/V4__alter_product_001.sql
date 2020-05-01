@@ -1,0 +1,2 @@
+ALTER TABLE table_name
+ADD COLUMN s3Path VARCHAR(255);
