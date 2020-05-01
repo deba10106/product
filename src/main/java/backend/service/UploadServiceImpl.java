@@ -39,11 +39,12 @@ public class UploadServiceImpl implements UploadService {
 	private String uploadProductPhoto(String title, String base64Data) {
 		Regions clientRegion = Regions.AP_SOUTHEAST_1;
 		String bucketName = AWS_S3_PRODUCT_PHOTO_BUCKET_NAME;
-		String objectKey = UUID.randomUUID().toString();
-		
 		String base64Metadata[] = base64Data.split(";");
 		String base64ContentType[] = base64Metadata[0].split(":");
 		String contentType = base64ContentType[1];
+		String imageExtension = contentType.split("/")[1];
+		
+		String objectKey = UUID.randomUUID().toString() + "." + imageExtension;
 		
 		byte[] bI = Base64.decodeBase64((base64Data.substring(base64Data.indexOf(",")+1)).getBytes());
 		InputStream input = new ByteArrayInputStream(bI);
