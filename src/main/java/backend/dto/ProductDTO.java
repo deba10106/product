@@ -18,5 +18,4 @@ public class ProductDTO {
 	private ZonedDateTime expiryAt;
 	private String base64Data;
 	private String s3ImagePath;
-	 
 }

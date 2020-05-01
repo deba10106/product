@@ -68,6 +68,9 @@ class ProductServiceTest {
 	
 	@Test
 	void getAllProductTest() {
+		Product product = new Product();
+		product.setIsDeleted(false);
+		
 		productService.findAll();
 		verify(productRepository, times(1)).findAll(any());
 	}
