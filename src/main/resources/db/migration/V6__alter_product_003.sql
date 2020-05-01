@@ -1,2 +1,2 @@
 ALTER TABLE products
-DROP COLUMN s3ImagePath VARCHAR(255);
+DROP COLUMN s3ImagePath;
