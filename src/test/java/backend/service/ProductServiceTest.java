@@ -17,7 +17,7 @@ import backend.dto.ProductDTO;
 import backend.model.Product;
 import backend.repository.ProductRepository;
 
-@SpringBootTest(classes = ProductServiceImpl.class)
+@SpringBootTest(classes = {ProductServiceImpl.class, UploadServiceImpl.class})
 class ProductServiceTest {
 	
 	@Autowired
@@ -85,6 +85,5 @@ class ProductServiceTest {
 		
 		verify(productRepository, times(1)).findAll(any());
 	}
-	
 
 }

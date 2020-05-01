@@ -36,6 +36,7 @@ public class Product extends BaseModel {
 	private String description;
     private BigDecimal price;
     private ZonedDateTime expiryAt;
+    private String s3ImagePath;
     
     @ManyToMany
     private Set<Cart> carts;

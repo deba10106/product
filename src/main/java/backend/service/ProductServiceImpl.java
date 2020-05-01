@@ -21,9 +21,13 @@ public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private UploadService uploadService;
 
 	@Override
 	public Long create(ProductDTO productDTO) {
+		uploadService.uploadProductPhoto(productDTO);
 		Product product = new Product();
 		BeanUtils.copyProperties(productDTO, product);
 		product = productRepository.save(product);
@@ -33,6 +37,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public void update(ProductDTO productDTO) {
+		uploadService.uploadProductPhoto(productDTO);
 		Product product = new Product();
 		BeanUtils.copyProperties(productDTO, product);
 		productRepository.save(product);

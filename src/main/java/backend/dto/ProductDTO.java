@@ -16,4 +16,6 @@ public class ProductDTO {
 	private String description;
 	private BigDecimal price;
 	private ZonedDateTime expiryAt;
+	private String base64Data;
+	private String s3ImagePath;
 }
