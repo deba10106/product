@@ -1,0 +1,2 @@
+ALTER TABLE products
+ADD COLUMN s3image_path VARCHAR(255);
