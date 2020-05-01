@@ -13,6 +13,7 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
@@ -70,6 +71,7 @@ public class UploadServiceImpl implements UploadService {
 			request.setMetadata(metadata);
 
 			s3Client.putObject(request);
+			s3Client.setObjectAcl(bucketName, objectKey, CannedAccessControlList.PublicRead);
 
 			// Upload a file as a new object with ContentType and title specified.
 			URL url = s3Client.getUrl(bucketName, objectKey);
