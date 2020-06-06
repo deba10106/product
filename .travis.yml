@@ -14,7 +14,7 @@ deploy:
   region: "ap-southeast-1"
   app: "account"
   env: "account-env"
-  bucket_name: "elasticbeanstalk-ap-southeast-1-693697407816"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-69369740781"
   bucket_path: "account"
   on:
     all_branches: true
