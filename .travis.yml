@@ -12,10 +12,10 @@ deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
   region: "ap-southeast-1"
-  app: "product"
-  env: "product-stag"
-  bucket_name: "elasticbeanstalk-ap-southeast-1-413765782488"
-  bucket_path: "product-stag"
+  app: "account"
+  env: "account-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-693697407816"
+  bucket_path: "account"
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^release\/.*$	  
